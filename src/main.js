@@ -24,7 +24,6 @@ hbs.registerPartials(partialsPath)
 // Home Page
 app.get('', (req, res) => {
     res.render('index', {
-        title: 'Best Community Services'
     })
 })
 
@@ -37,32 +36,51 @@ app.get('/space', (req, res) => {
 
 // Rent Equipment
 app.get('/equipment', (req, res) => {
-
+    res.render('equipment', {
+        title: 'Rent Equipment'
+    })
 })
 
 // Order Catering
 app.get('/catering', (req, res) => {
-
+    res.render('catering', {
+        title: 'Order Catering'
+    })
 })
 
 // Order Home Care
 app.get('/homecare', (req, res) => {
-
+    res.render('homecare', {
+        title: 'Order Home Care'
+    })
 })
 
 // Order Shuttle services
 app.get('/shuttle', (req, res) => {
-
+    res.render('shuttle', {
+        title: 'Shuttle Services'
+    })
 })
 
 // Class actions
 app.get('/class', (req, res) => {
-
+    res.render('class', {
+        title: 'Class Schedule'
+    })
 })
 
 // Volunteer Sign Up
 app.get('/volunteer', (req, res) => {
+    res.render('volunteer', {
+        title: 'Volunteer Sign Ups'
+    })
+})
 
+// Donations
+app.get('/donation', (req, res) => {
+    res.render('donation', {
+        title: 'Donations'
+    })
 })
 
 app.listen(port, () => {
