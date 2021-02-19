@@ -30,7 +30,9 @@ app.get('', (req, res) => {
 
 // Book Space
 app.get('/space', (req, res) => {
-
+    res.render('space', {
+        title: 'Space Booking'
+    })
 })
 
 // Rent Equipment
