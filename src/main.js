@@ -10,73 +10,91 @@
 const express = require('express')
 const path = require('path')
 const hbs = require('hbs')
+const multer = require('multer')
+const bodyParser = require('body-parser')
 
 const port = 8080
 const app = express()
+const upload = multer()
 const viewsPath = path.join(__dirname, '../templates/views')
 const partialsPath = path.join(__dirname, '../templates/partials')
 
-// Setup handlebars and views location
+// Set up handlebars and views location
 app.set('view engine', 'hbs')
 app.set('views', viewsPath)
 hbs.registerPartials(partialsPath)
 
-// Home Page
+// Set up body parser
+app.use(bodyParser.json())
+
+// GET Home Page
 app.get('', (req, res) => {
     res.render('index', {
     })
 })
 
-// Book Space
+// GET Book Space
 app.get('/space', (req, res) => {
     res.render('space', {
         title: 'Space Booking'
     })
 })
 
-// Rent Equipment
+// GET Rent Equipment
 app.get('/equipment', (req, res) => {
     res.render('equipment', {
         title: 'Rent Equipment'
     })
 })
 
-// Order Catering
+// GET Order Catering
 app.get('/catering', (req, res) => {
     res.render('catering', {
         title: 'Order Catering'
     })
 })
 
-// Order Home Care
+// GET Order Home Care
 app.get('/homecare', (req, res) => {
     res.render('homecare', {
         title: 'Order Home Care'
     })
 })
 
-// Order Shuttle services
+// GET Order Shuttle services
 app.get('/shuttle', (req, res) => {
     res.render('shuttle', {
         title: 'Shuttle Services'
     })
 })
 
-// Class actions
+// GET Class actions
 app.get('/class', (req, res) => {
     res.render('class', {
         title: 'Class Schedule'
     })
 })
 
-// Volunteer Sign Up
+// GET Volunteer Sign Up
 app.get('/volunteer', (req, res) => {
     res.render('volunteer', {
         title: 'Volunteer Sign Ups'
     })
 })
 
-// Donations
+// POST Donations
+app.post('/donation', upload.single('input'), (req, res) => {
+    console.log(req.body.cardnum, req.body.amount)
+    let cardNum = req.body.cardnum
+    let amount = req.body.amount
+
+
+    res.status(200).render('receipt', {
+        message: 'Your donation of ' + amount + ' has been charged to card ' + cardNum + '.'
+    })
+})
+
+// GET Donations
 app.get('/donation', (req, res) => {
     res.render('donation', {
         title: 'Donations'
@@ -85,4 +103,5 @@ app.get('/donation', (req, res) => {
 
 app.listen(port, () => {
     console.log('Server is up on port ' + port)
+    console.log('To access webpage, open a browser and navigate to "localhost:' + port + '"')
 })

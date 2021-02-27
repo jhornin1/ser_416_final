@@ -4,5 +4,25 @@
 
 <body>
     {{>header}}
+
+    <div>
+        <p> Example donation form. Do not use an actual card number. (duh)</p>
+
+        <p> Thank you for donating to Best Community Services! Enter your desired amount and payment method,
+            and we will process your donation.</p>
+    </div>
+    <div>
+        <form action="/donation" method="post" enctype="multipart/form-data">
+            <label for="cardnum">Credit or Debit Card Number (#### #### #### ####):</label>
+            <input type="tel" id="cardnum" name="cardnum" required="required" pattern="[0-9]{4} [0-9]{4} [0-9]{4} [0-9]{4}">
+            <label for="amount">Donation Amount:</label>
+            <input type="number" id="amount" required="required" name="amount">
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+    {{message}}
+
+    {{footer}}
 </body>
 </html>
