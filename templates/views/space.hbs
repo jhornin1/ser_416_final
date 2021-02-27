@@ -5,6 +5,37 @@
 <body>
     {{>header}}
 
+    <div>
+        <p>Example page for the booking of a space.</p>
+        <p>Select a space to use and specify a date and time for its use.</p>
+        <p></p>
+    </div>
+    <div>
+        <form action="/space" method="post" enctype="multipart/form-data">
+            <p>Select a space:</p>
+            <input type="radio" id="theatre" name="room">
+            <label for="theatre">Theatre</label>
+            <input type="radio" id="ballroom" name="room">
+            <label for="ballroom">Ballroom</label>
+            <input type="radio" id="classroom1" name="room">
+            <label for="theatre">Classroom 1</label>
+            <input type="radio" id="classroom2" name="room">
+            <label for="theatre">Classroom 2</label>
+            <input type="radio" id="classroom3" name="room">
+            <label for="theatre">Classroom 3</label>
+
+            <p></p>
+            <label for="date">Booking Date:</label>
+            <input type="date" id="date" name="date">
+
+            <p>Select the timeslot:</p>
+
+
+
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
     {{>footer}}
 </body>
 </html>

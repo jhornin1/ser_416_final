@@ -27,10 +27,19 @@ hbs.registerPartials(partialsPath)
 // Set up body parser
 app.use(bodyParser.json())
 
+// CREATE ENDPOINTS
+
 // GET Home Page
 app.get('', (req, res) => {
     res.render('index', {
     })
+})
+
+// POST Book Space
+app.post('/space', upload.single('input'), (req, res) => {
+    console.log(req.body)
+
+    res.status(204).send()
 })
 
 // GET Book Space
@@ -84,7 +93,6 @@ app.get('/volunteer', (req, res) => {
 
 // POST Donations
 app.post('/donation', upload.single('input'), (req, res) => {
-    console.log(req.body.cardnum, req.body.amount)
     let cardNum = req.body.cardnum
     let amount = req.body.amount
 
