@@ -13,26 +13,44 @@
     <div>
         <form action="/space" method="post" enctype="multipart/form-data">
             <p>Select a space:</p>
-            <input type="radio" id="theatre" name="room">
-            <label for="theatre">Theatre</label>
-            <input type="radio" id="ballroom" name="room">
-            <label for="ballroom">Ballroom</label>
-            <input type="radio" id="classroom1" name="room">
-            <label for="theatre">Classroom 1</label>
-            <input type="radio" id="classroom2" name="room">
-            <label for="theatre">Classroom 2</label>
-            <input type="radio" id="classroom3" name="room">
-            <label for="theatre">Classroom 3</label>
+            <input type="radio" id="theatre" name="room" value="the theatre" required>
+            <label for="theatre">Theatre</label><br>
+            <input type="radio" id="ballroom" name="room" value="the ballroom" required>
+            <label for="ballroom">Ballroom</label><br>
+            <input type="radio" id="classroom1" name="room" value="classroom 1" required>
+            <label for="theatre">Classroom 1</label><br>
+            <input type="radio" id="classroom2" name="room" value="classroom 2" required>
+            <label for="theatre">Classroom 2</label><br>
+            <input type="radio" id="classroom3" name="room" value="classroom 3" required>
+            <label for="theatre">Classroom 3</label><br><br>
 
-            <p></p>
             <label for="date">Booking Date:</label>
-            <input type="date" id="date" name="date">
+            <input type="date" id="date" name="date" required><br><br>
 
             <p>Select the timeslot:</p>
+            <p style="color: red;">{{timeErr}}</p>
+            <input type="checkbox" id="9a" name="0" value="9:00 AM">
+            <label for="9a">9:00 AM - 10:00 AM</label><br>
+            <input type="checkbox" id="10a" name="1" value="10:00 AM">
+            <label for="10a">10:00 AM - 11:00 AM</label><br>
+            <input type="checkbox" id="11a" name="2" value="11:00 AM">
+            <label for="11a">11:00 AM - 12:00 PM</label><br>
+            <input type="checkbox" id="12p" name="3" value="12:00 PM">
+            <label for="12p">12:00 PM - 1:00 PM</label><br>
+            <input type="checkbox" id="1p" name="4" value="1:00 PM">
+            <label for="1p">1:00 PM - 2:00 PM</label><br>
+            <input type="checkbox" id="2p" name="5" value="2:00 PM">
+            <label for="2p">2:00 PM - 3:00 PM</label><br>
+            <input type="checkbox" id="3p" name="6" value="3:00 PM">
+            <label for="3p">3:00 PM - 4:00 PM</label><br>
+            <input type="checkbox" id="4p" name="7" value="4:00 PM">
+            <label for="4p">4:00 PM - 5:00 PM</label><br>
+            <input type="checkbox" id="5p" name="8" value="5:00 PM">
+            <label for="5p">5:00 PM - 6:00 PM</label><br>
+            <input type="checkbox" id="6p" name="9" value="6:00 PM">
+            <label for="6p">6:00 PM - 7:00 PM</label><br>
 
-
-
-            <input type="submit" value="Submit">
+            <br><input type="submit" value="Submit">
         </form>
     </div>
 

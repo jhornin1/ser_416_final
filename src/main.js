@@ -37,9 +37,55 @@ app.get('', (req, res) => {
 
 // POST Book Space
 app.post('/space', upload.single('input'), (req, res) => {
-    console.log(req.body)
 
-    res.status(204).send()
+    // Start by checking if they filled out the time portion correctly
+    // at least one box must be checked, and it must be a continuous range
+    let firstBox = -1 // If it is negative, then a box was not checked. else, it is the first index
+    let rangeOver = false
+    let duration = 0
+    for (let i = 0; i < 10; i++) {
+        if (req.body[i] !== undefined) { // If it has a value
+            if (rangeOver) { // and there is a gap between time entries
+                res.render('space', {
+                    title: 'Space Booking',
+                    timeErr: 'Time slot entries must be a continuous range.'
+                })
+                return
+                // notify the client and then exit the endpoint
+            }
+
+            if (firstBox < 0) { // and it is the first value
+                firstBox = i // set it as the first value
+            }
+
+            duration++ // increment the duration of the booking.
+
+        } else { // If the item is undefined
+            if (firstBox >= 0) { // and a box has been checked
+                rangeOver = true // note that the acceptable range is over
+            }
+        }
+    }
+
+    // If we leave the loop and firstBox is still negative, then no selection was made.
+    if (firstBox < 0) {
+        res.render('space', {
+            title: 'Space Booking',
+            timeErr: 'Time slot must be selected.'
+        })
+        return
+
+    } else { // If selections are valid, then send a receipt.
+
+        let date = new Date(Date.parse(req.body.date)).toDateString()
+        let time = req.body[firstBox]
+
+        res.render('receipt', {
+            message: 'Your booking has been made for ' + req.body.room + ' on ' +
+                     date + ' at ' + time + ' for ' + duration + ' hours.'
+
+        })
+    }
 })
 
 // GET Book Space
