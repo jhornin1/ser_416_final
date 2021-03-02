@@ -12,6 +12,7 @@ const path = require('path')
 const hbs = require('hbs')
 const multer = require('multer')
 const bodyParser = require('body-parser')
+const util = require('./util')
 
 const port = 8080
 const app = express()
@@ -38,53 +39,38 @@ app.get('', (req, res) => {
 // POST Book Space
 app.post('/space', upload.single('input'), (req, res) => {
 
-    // Start by checking if they filled out the time portion correctly
-    // at least one box must be checked, and it must be a continuous range
-    let firstBox = -1 // If it is negative, then a box was not checked. else, it is the first index
-    let rangeOver = false
-    let duration = 0
-    for (let i = 0; i < 10; i++) {
-        if (req.body[i] !== undefined) { // If it has a value
-            if (rangeOver) { // and there is a gap between time entries
-                res.render('space', {
-                    title: 'Space Booking',
-                    timeErr: 'Time slot entries must be a continuous range.'
-                })
-                return
-                // notify the client and then exit the endpoint
-            }
+    let validate = util.validateTime(req.body)
 
-            if (firstBox < 0) { // and it is the first value
-                firstBox = i // set it as the first value
-            }
-
-            duration++ // increment the duration of the booking.
-
-        } else { // If the item is undefined
-            if (firstBox >= 0) { // and a box has been checked
-                rangeOver = true // note that the acceptable range is over
-            }
-        }
-    }
-
-    // If we leave the loop and firstBox is still negative, then no selection was made.
-    if (firstBox < 0) {
+    if (validate !== '') { // If the method returned a non-empty string, send back the error
         res.render('space', {
             title: 'Space Booking',
-            timeErr: 'Time slot must be selected.'
+            timeErr: validate
         })
-        return
 
-    } else { // If selections are valid, then send a receipt.
+    } else { // If the checkboxes were valid
+        // Find the smallest time selected
+        let firstBox = 0
+        let counter = 0
+        while (true) {
+            if (req.body[counter++] !== undefined) {
+                firstBox = counter - 1
+                break
+            }
+        }
 
-        let date = new Date(Date.parse(req.body.date)).toDateString()
+        // Get the number of times checked
+        let duration = Object.values(req.body).length - 2
+        // Get the date
+        let date = new Date(Date.parse(req.body.date))
+        date.setDate(date.getDate() + 1) // adjust for date indexing.
+        date = date.toDateString() // get the date in string form.
+        // And interpret the selected time.
         let time = req.body[firstBox]
 
         res.render('receipt', {
             title: 'Receipt',
             message: 'Your booking has been made for ' + req.body.room.bold() + ' on ' +
-                     date.bold() + ' at ' + time.bold() + ' for ' + duration + ' hours.'
-
+                date.bold() + ' at ' + time.bold() + ' for ' + duration + ' hours.'
         })
     }
 })
