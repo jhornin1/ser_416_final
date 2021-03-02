@@ -81,8 +81,9 @@ app.post('/space', upload.single('input'), (req, res) => {
         let time = req.body[firstBox]
 
         res.render('receipt', {
-            message: 'Your booking has been made for ' + req.body.room + ' on ' +
-                     date + ' at ' + time + ' for ' + duration + ' hours.'
+            title: 'Receipt',
+            message: 'Your booking has been made for ' + req.body.room.bold() + ' on ' +
+                     date.bold() + ' at ' + time.bold() + ' for ' + duration + ' hours.'
 
         })
     }
@@ -94,6 +95,11 @@ app.get('/space', (req, res) => {
         title: 'Space Booking'
     })
 })
+
+// POST Rent Equipment
+app.post('/equipment', upload.single('input', (req, res) => {
+
+}))
 
 // GET Rent Equipment
 app.get('/equipment', (req, res) => {
@@ -144,6 +150,7 @@ app.post('/donation', upload.single('input'), (req, res) => {
 
 
     res.status(200).render('receipt', {
+        title: 'receipt',
         message: 'Your donation of ' + amount + ' has been charged to card ' + cardNum + '.'
     })
 })
