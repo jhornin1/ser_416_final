@@ -176,6 +176,21 @@ app.get('/shuttle', (req, res) => {
     })
 })
 
+// POST class registration
+app.post('/class', upload.single('input'), (req, res) => {
+    let meeting = req.body.meeting
+    let roster = req.body.class
+    let name = req.body.name
+
+    let response = 'You have registered for ' + meeting.bold() + ' in the ' + roster.bold() + ' class.<br> We look forward' +
+                   ' to seeing you ' + name + '!'
+
+    res.render('receipt', {
+        title: 'Receipt',
+        message: response
+    })
+})
+
 // GET Class actions
 app.get('/class', (req, res) => {
     res.render('class', {

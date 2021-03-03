@@ -5,6 +5,36 @@
 <body>
     {{>header}}
 
+        <p>Example Class Registration page for Best Community Services. Select a class, registration type, and enter name:</p>
+
+    <div>
+        <form action="/class" method="post" enctype="multipart/form-data">
+
+            <p>Select a class:</p>
+            <input type="radio" id="c1" name="class" value="Pottery Unleashed" required>
+            <label for="c1">Pottery Unleashed</label><br>
+            <input type="radio" id="c2" name="class" value="Botany for the Soul" required>
+            <label for="c2">Botany for the Soul</label><br>
+            <input type="radio" id="c3" name="class" value="Aggressive Yoga" required>
+            <label for="c3">Aggressive Yoga</label><br>
+            <input type="radio" id="c3" name="class" value="Knitting" required>
+            <label for="c3">Knitting</label><br>
+            <input type="radio" id="c4" name="class" value="Hardcore Knitting" required>
+            <label for="c4">Hardcore Knitting</label><br><br>
+
+            <label for="name">Enter your name:</label>
+            <input type="name" id="name" name="name" required><br><br>
+
+            <p>Select a registration type:</p>
+            <input type="radio" id="m1" name="meeting" value="General Attendance" required>
+            <label for="m1">General Attendance</label><br>
+            <input type="radio" id="m2" name="meeting" value="Next Meeting" required>
+            <label for="m2">Only Next Meeting</label><br>
+
+            <br><input type="submit" value="Submit">
+        </form>
+    </div>
+
     {{>footer}}
 </body>
 </html>
