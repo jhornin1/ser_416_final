@@ -11,7 +11,7 @@ databases, persistent storage, or memory-based storage. It simulates simple UI i
 and some basic checks.
 
 ## Setup ##
-1. Install Node js. This app is developed with v. 15.2.1 I'm pretty sure that V.14 and up is good.
+1. Install Node js. This app is developed with v. 15.2.1, but I'm pretty sure that V.14 and up is good.
 2. Run `npm i` from the root directory. This will install the dependencies necessary to run the server.
 3. Run `node src/main.js` from the root directory on command line. This will print out a message
 that the server is up and listening and what url to navigate to from a web browser.
