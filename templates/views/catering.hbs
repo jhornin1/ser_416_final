@@ -5,6 +5,42 @@
 <body>
     {{>header}}
 
+    <div>
+        <p>Example page for the purchasing of catering.</p>
+        <p>Select a caterer, the number of people, payment card number, and the date of the booking.</p>
+        <p></p>
+    </div>
+    <div>
+        <form action="/catering" method="post" enctype="multipart/form-data">
+            <p>Select a space:</p>
+            <input type="radio" id="e1" name="caterer" value="McRandall's" required>
+            <label for="e1">McRandall's</label><br>
+            <input type="radio" id="e2" name="caterer" value="Daco Tell" required>
+            <label for="e2">Daco Tell</label><br>
+            <input type="radio" id="e3" name="caterer" value="Not Carl's Jr" required>
+            <label for="e3">Not Carl's Jr</label><br><br>
+
+            <p>Select the number of people:<br><i>Price is $5 per person plus $10</i></p>
+            <input type="radio" id="p1" name="people" value="5" required>
+            <label for="p1">5 people</label><br>
+            <input type="radio" id="p2" name="people" value="10" required>
+            <label for="p2">10 people</label><br>
+            <input type="radio" id="p3" name="people" value="15" required>
+            <label for="p3">15 people</label><br>
+            <input type="radio" id="p4" name="people" value="20" required>
+            <label for="p4">20 people</label><br><br>
+
+            <label for="delTime">Select a delivery time:</label>
+            <input type="time" id="delTime" name="time" required><br>
+
+            {{>paymentcard}}<br>
+
+            {{>date}}<br>
+
+            <br><input type="submit" value="Submit">
+        </form>
+    </div>
+
     {{>footer}}
 </body>
 </html>

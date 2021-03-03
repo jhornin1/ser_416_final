@@ -105,6 +105,28 @@ app.get('/equipment', (req, res) => {
     })
 })
 
+// POST Order Catering
+app.post('/catering', upload.single('input'), (req, res) => {
+
+    let price = req.body.people * 5 + 10
+    let caterer = req.body.caterer
+    let cardNum = req.body.cardnum
+    let time = req.body.time.split(':')
+    time[0] = Number(time[0])
+    let am = time[0] > 12 ? 'PM' : 'AM'
+    time[0] = am === 'AM' ? time[0] : time[0] - 12
+    time = time[0] + ':' + time[1] + ' ' + am
+    let date = util.getDate(req.body.date)
+
+    let response = 'Your catering order from ' + caterer + ' for ' + req.body.people + ' people has been processed to be' +
+                    ' delivered on ' + date.bold() + ' at ' + time.bold() + '. <br>$' + price + ' has been charged to ' + cardNum + '.'
+
+    res.render('receipt', {
+        title: 'Receipt',
+        message: response
+    })
+})
+
 // GET Order Catering
 app.get('/catering', (req, res) => {
     res.render('catering', {
