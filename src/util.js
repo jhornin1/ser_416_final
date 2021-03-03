@@ -70,9 +70,24 @@ const getDate = (dateStr) => {
     // And interpret the selected time.
 }
 
+/**
+ * Function takes a string in military time and converts it to standard time.
+ *
+ * @param time
+ */
+const convertTime = (milTime) => {
+    let time = milTime.split(':')
+    // Format the time
+    time[0] = Number(time[0])
+    let am = time[0] > 12 ? 'PM' : 'AM'
+    time[0] = am === 'AM' ? time[0] : time[0] - 12
+    return time[0] + ':' + time[1] + ' ' + am
+}
+
 module.exports = {
     validateTime,
     timeStart,
     getDur,
-    getDate
+    getDate,
+    convertTime
 }
