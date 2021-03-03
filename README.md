@@ -17,3 +17,7 @@ that the server is up and listening and what url to navigate to from a web brows
 4. Open a web browser like Chrome or Firefox and navigate to the specified url. It should be `localhost:8080`
 5. If another process is using Port 8080, the server will fail. At this point,
 it is not able to search for another open port.
+
+## Exit ##
+The program can be closed by typing `Ctrl + C` into the command line. I used Windows for
+development, and I don't remember the analogous keys in mac or linux. I would assume the work.
