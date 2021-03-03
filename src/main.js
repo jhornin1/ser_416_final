@@ -49,22 +49,12 @@ app.post('/space', upload.single('input'), (req, res) => {
 
     } else { // If the checkboxes were valid
         // Find the smallest time selected
-        let firstBox = 0
-        let counter = 0
-        while (true) {
-            if (req.body[counter++] !== undefined) {
-                firstBox = counter - 1
-                break
-            }
-        }
+        let firstBox = util.timeStart(req.body)
 
         // Get the number of times checked
-        let duration = Object.values(req.body).length - 2
+        let duration = util.getDur(req.body, 2)
         // Get the date
-        let date = new Date(Date.parse(req.body.date))
-        date.setDate(date.getDate() + 1) // adjust for date indexing.
-        date = date.toDateString() // get the date in string form.
-        // And interpret the selected time.
+        let date = util.getDate(req.body.date)
         let time = req.body[firstBox]
 
         res.render('receipt', {
@@ -83,9 +73,30 @@ app.get('/space', (req, res) => {
 })
 
 // POST Rent Equipment
-app.post('/equipment', upload.single('input', (req, res) => {
+app.post('/equipment', upload.single('input'), (req, res) => {
 
-}))
+    let validate = util.validateTime(req.body) // validate the timeslot entry
+
+    if (validate !== '') { // If there is an error message
+        res.render('equipment', {
+            title: 'Rent Equipment',
+            timeErr: validate
+        })
+
+    } else { // If the boxes were valid
+        let firstBox = util.timeStart(req.body)
+        let duration = util.getDur(req.body, 3)
+        let date = util.getDate(req.body.date)
+        let time = req.body[firstBox]
+
+
+        res.render('receipt', {
+            title: 'Receipt',
+            message: 'Your booking has been made for the ' + req.body.equipment.bold() + ' on ' +
+                     date.bold() + ' at ' + time.bold() + ' for ' + duration + ' hours.'
+        })
+    }
+})
 
 // GET Rent Equipment
 app.get('/equipment', (req, res) => {

@@ -5,6 +5,27 @@
 <body>
     {{>header}}
 
+    <div>
+        <p>Example page for the booking of a rental Equipment.</p>
+        <p>Select a piece of equipment to use, provide payment info, and specify a date and time for its use.</p>
+        <p></p>
+    </div>
+    <div>
+        <form action="/equipment" method="post" enctype="multipart/form-data">
+            <p>Select a space:</p>
+            <input type="radio" id="e1" name="equipment" value="Chainsaw" required>
+            <label for="e1">Chainsaw</label><br>
+            <input type="radio" id="e2" name="equipment" value="Small Trailer" required>
+            <label for="e2">Small Trailer</label><br>
+            <input type="radio" id="e3" name="equipment" value="Big Trailer" required>
+            <label for="e3">Big Trailer</label><br><br>
+
+            {{>datetime}}<br>
+
+            <br><input type="submit" value="Submit">
+        </form>
+    </div>
+
     {{>footer}}
 </body>
 </html>

@@ -30,6 +30,49 @@ const validateTime = (checkboxes) => {
     return exists ? '' : 'Time slot must be selected.'
 }
 
+/**
+ * Function takes a set of checkboxes representing a time-range selection from 9am to 6pm
+ * and gets the first time box checked.
+ *
+ * @param checkboxes An object in which time selections are represented with indexes.
+ * @returns {number} The index of the first selected time box.
+ */
+const timeStart = (checkboxes) => {
+    let counter = 0
+    while (true) {
+        if (checkboxes[counter++] !== undefined) {
+            return counter - 1
+        }
+    }
+}
+
+/**
+ * Function takes an object in which a number of time boxes are selected and the number of extraneous properties in the
+ * object. Returns the duration of time selected.
+ *
+ * @param request An object with checkbox information.
+ * @param nonTime The number of extraneous properties in the object.
+ */
+const getDur = (request, nonTime) => {
+    return Object.values(request).length - nonTime
+}
+
+/**
+ * Function takes a string version of a date and converts it to a more readable version.
+ *
+ * @param dateStr The date string to be parsed.
+ * @returns {string} A readable version of the date string.
+ */
+const getDate = (dateStr) => {
+    let date = new Date(Date.parse(dateStr))
+    date.setDate(date.getDate() + 1) // adjust for date indexing.
+    return date.toDateString() // get the date in string form.
+    // And interpret the selected time.
+}
+
 module.exports = {
-    validateTime
+    validateTime,
+    timeStart,
+    getDur,
+    getDate
 }
