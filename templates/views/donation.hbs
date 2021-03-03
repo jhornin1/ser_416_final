@@ -13,9 +13,9 @@
     </div>
     <div>
         <form action="/donation" method="post" enctype="multipart/form-data">
-            {{>paymentcard}}
+            {{>paymentcard}}<br>
             <label for="amount">Donation Amount:</label>
-            <input type="number" id="amount" required="required" name="amount">
+            <input type="number" id="amount" required="required" name="amount"><br><br>
             <input type="submit" value="Submit">
         </form>
     </div>

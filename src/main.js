@@ -42,7 +42,7 @@ app.post('/space', upload.single('input'), (req, res) => {
     let validate = util.validateTime(req.body)
 
     if (validate !== '') { // If the method returned a non-empty string, send back the error
-        res.render('space', {
+        res.status(400).render('space', {
             title: 'Space Booking',
             timeErr: validate
         })
@@ -57,7 +57,7 @@ app.post('/space', upload.single('input'), (req, res) => {
         let date = util.getDate(req.body.date)
         let time = req.body[firstBox]
 
-        res.render('receipt', {
+        res.status(200).render('receipt', {
             title: 'Receipt',
             message: 'Your booking has been made for ' + req.body.room.bold() + ' on ' +
                 date.bold() + ' at ' + time.bold() + ' for ' + duration + ' hours.'
@@ -78,19 +78,19 @@ app.post('/equipment', upload.single('input'), (req, res) => {
     let validate = util.validateTime(req.body) // validate the timeslot entry
 
     if (validate !== '') { // If there is an error message
-        res.render('equipment', {
+        res.status(400).render('equipment', {
             title: 'Rent Equipment',
             timeErr: validate
         })
 
     } else { // If the boxes were valid
         let firstBox = util.timeStart(req.body)
-        let duration = util.getDur(req.body, 3)
+        let duration = util.getDur(req.body, 2)
         let date = util.getDate(req.body.date)
         let time = req.body[firstBox]
 
 
-        res.render('receipt', {
+        res.status(200).render('receipt', {
             title: 'Receipt',
             message: 'Your booking has been made for the ' + req.body.equipment.bold() + ' on ' +
                      date.bold() + ' at ' + time.bold() + ' for ' + duration + ' hours.'
@@ -117,7 +117,7 @@ app.post('/catering', upload.single('input'), (req, res) => {
     let response = 'Your catering order from ' + caterer + ' for ' + req.body.people + ' people has been processed to be' +
                     ' delivered on ' + date.bold() + ' at ' + time.bold() + '. <br>$' + price + ' has been charged to ' + cardNum.bold() + '.'
 
-    res.render('receipt', {
+    res.status(200).render('receipt', {
         title: 'Receipt',
         message: response
     })
@@ -138,7 +138,7 @@ app.post('/homecare', upload.single('input'), (req, res) => {
     let response = 'Thank you for ordering Home Care through Best Community Services! ' + provider.bold() + ' has been notified ' +
                   ' that you are interested in them. You will be contacted shortly at ' + email.bold()
 
-    res.render('receipt', {
+    res.status(200).render('receipt', {
         title: 'Receipt',
         message: response
     })
@@ -163,7 +163,7 @@ app.post('/shuttle', upload.single('input'), (req, res) => {
                    ' Pickup address is ' + orig.bold() + ', and destination address is ' + dest.bold() + '.<br>Your total of $50 has been' +
                    ' charged to ' + cardNum.bold() + '.'
 
-    res.render('receipt', {
+    res.status(200).render('receipt', {
         title: 'Receipt',
         message: response
     })
@@ -185,7 +185,7 @@ app.post('/class', upload.single('input'), (req, res) => {
     let response = 'You have registered for ' + meeting.bold() + ' in the ' + roster.bold() + ' class.<br> We look forward' +
                    ' to seeing you ' + name + '!'
 
-    res.render('receipt', {
+    res.status(200).render('receipt', {
         title: 'Receipt',
         message: response
     })
@@ -193,14 +193,27 @@ app.post('/class', upload.single('input'), (req, res) => {
 
 // GET Class actions
 app.get('/class', (req, res) => {
-    res.render('class', {
+    res.status(200).render('class', {
         title: 'Class Schedule'
+    })
+})
+
+// POST volunteer sign up
+app.post('/volunteer', upload.single('input'), (req, res) => {
+    let name = req.body.name
+    let email = req.body.email
+
+    let response = 'Thank you for signing up to volunteer, '+ name + '! The manager will email you at ' + email.bold()
+
+    res.status(200).render('receipt', {
+        title: 'Receipt',
+        message: response
     })
 })
 
 // GET Volunteer Sign Up
 app.get('/volunteer', (req, res) => {
-    res.render('volunteer', {
+    res.status(200).render('volunteer', {
         title: 'Volunteer Sign Ups'
     })
 })
@@ -212,8 +225,8 @@ app.post('/donation', upload.single('input'), (req, res) => {
 
 
     res.status(200).render('receipt', {
-        title: 'receipt',
-        message: 'Your donation of ' + amount + ' has been charged to card ' + cardNum + '.'
+        title: 'Receipt',
+        message: 'Your donation of $' + amount.bold() + ' has been charged to card ' + cardNum.bold() + '.<br> We appreciate your generosity!'
     })
 })
 

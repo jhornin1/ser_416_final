@@ -5,6 +5,19 @@
 <body>
     {{>header}}
 
+    <div>
+        <p>Thank you for your interest in volunteering for Best Community Services!<br>Enter your name and contact info, and we'll make contact shortly.</p>
+    </div>
+    <div>
+        <form action="/volunteer" method="post" enctype="multipart/form-data">
+
+            {{>name}}
+
+            {{>email}}
+
+            <br><input type="submit" value="Submit">
+        </form>
+    </div>
     {{>footer}}
 </body>
 </html>
