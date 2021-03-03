@@ -3,8 +3,7 @@
 ## Purpose ##
 This is a prototype website for SER 416 Spring A 2021 for Professor Buell.
 
-This is created by John Horning for the final project of the class (jhornin1@asu.edu johnhorning@gmail.com)
-
+This is created by John Horning (jhornin1@asu.edu) for the final project of the class. 
 It simulates the main Customer-facing use cases of a website for providing a Community
 Center's services to the surrounding area. There is no actual backend either in the form of
 databases, persistent storage, or memory-based storage. It simulates simple UI interactions
