@@ -5,6 +5,30 @@
 <body>
     {{>header}}
 
+    <div>
+
+        <p> Example page for ordering home care through Best Community Services</p>
+    </div>
+    <div>
+        <form action="/homecare" method="post" enctype="multipart/form-data">
+
+            <p>Select a provider:</p>
+            <input type="radio" id="e1" name="provider" value="Best Home Care Professionals" required>
+            <label for="e1">Best Home Care Professionals</label><br>
+            <input type="radio" id="e2" name="provider" value="Professional Home Care Services" required>
+            <label for="e2">Professional Home Care Services</label><br>
+            <input type="radio" id="e3" name="provider" value="Quality Home Care Professionals" required>
+            <label for="e3">Quality Home Care Professionals</label><br>
+            <input type="radio" id="e3" name="provider" value="A Funny Company Name" required>
+            <label for="e3">A Funny Company Name</label><br><br>
+
+            <label for="email">Enter your email:</label>
+            <input type="email" id="email" name="email" required><br><br>
+
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
     {{>footer}}
 </body>
 </html>

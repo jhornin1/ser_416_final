@@ -112,6 +112,7 @@ app.post('/catering', upload.single('input'), (req, res) => {
     let caterer = req.body.caterer
     let cardNum = req.body.cardnum
     let time = req.body.time.split(':')
+    // Format the time
     time[0] = Number(time[0])
     let am = time[0] > 12 ? 'PM' : 'AM'
     time[0] = am === 'AM' ? time[0] : time[0] - 12
@@ -131,6 +132,20 @@ app.post('/catering', upload.single('input'), (req, res) => {
 app.get('/catering', (req, res) => {
     res.render('catering', {
         title: 'Order Catering'
+    })
+})
+
+// POST Order Home Care
+app.post('/homecare', upload.single('input'), (req, res) => {
+    let provider = req.body.provider
+    let email = req.body.email
+
+    let response = 'Thank you for ordering Home Care through Best Community Services! ' + provider.bold() + ' has been notified ' +
+                  ' that you are interested in them. You will be contacted shortly at ' + email.bold()
+
+    res.render('receipt', {
+        title: 'Receipt',
+        message: response
     })
 })
 
